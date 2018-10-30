@@ -47,9 +47,10 @@ def find_set(H,deg):
 
 ## VARIABLES
 no_of_Hindex = 4
+actual_max_shell = 0
 
 ## CREATING DIGRAPH 
-G = nx.read_adjlist("facebook_combined.txt",create_using=nx.Graph(), nodetype=int)
+G = nx.read_adjlist("DATASET1/dataset1.txt",create_using=nx.Graph(), nodetype=int)
 
 nodes_list = list(G.nodes())
 edges_list = list(G.edges())
@@ -126,28 +127,71 @@ for i in range(0,len(buckets),1):
 # print("==========================================")
 
 
-###### RANDOM WALK
+
 
 ## VARIABLES
-no_run = 30
+no_run = 2
 percent_of_nodes = 1.0
 percent_nodes = (int)((percent_of_nodes/100.0)*no_nodes)
 current = 0
 max_shell = 0
+neighbour_max_shell = 0
+neighbour_max_shell_value = 0
 
-print("ACTUAL MAX SHELL : "+str(len(buckets)+1))
+actual_max_shell = len(buckets) + 1
+print("ACTUAL MAX SHELL : "+str(actual_max_shell))
+
+###### RANDOM WALK
+print("=========================================")
+print("RANDOM WALK :")
+print("=========================================")
 for i in range(0,no_run,1):
-	print("==================================")
+	print("--------------------------------------")
 	print("RUN NO  : "+str(i+1))
 	current = random.choice(nodes_list)
 	max_shell = dict_shell[current] + 1
 
 	for j in range(1,percent_nodes,1):
-		print(str(current)+":"+str(dict_shell[current])),
+		print(str(current)+":"+str(dict_shell[current]+1)),
 		neighbours = [m for m in G[current]]
 		current = random.choice(neighbours)
 		if ( max_shell < dict_shell[current] + 1 ):
 			max_shell = dict_shell[current] + 1
 		print("->"),
+	print()
+	print("MAX SHELL REACHED : "+str(max_shell))
+
+
+print()
+
+###### HILL CLIMBING
+print("=========================================")
+print("HILL CLIMBING :")
+print("=========================================")
+for i in range(0,no_run,1):
+	print("--------------------------------------")
+	print("RUN NO  : "+str(i+1))
+	current = random.choice(nodes_list)
+	max_shell = dict_shell[current] + 1
+
+	for j in range(1,percent_nodes,1):
+		print(str(current)+":"+str(dict_shell[current]+1)),
+		
+		if ( dict_shell[current] + 1 != actual_max_shell ):
+			neighbours = [m for m in G[current]]
+			neighbour_max_shell = neighbours[0]
+			neighbour_max_shell_value = dict_shell[neighbour_max_shell] + 1
+			for k in neighbours:
+				#print(str(k)+":"+str(dict_shell[k]+1))
+				if ( neighbour_max_shell_value < dict_shell[k] + 1 ):
+					neighbour_max_shell = k
+					neighbour_max_shell_value = dict_shell[k] + 1
+		else:
+			break
+
+		current = neighbour_max_shell
+		if ( max_shell < neighbour_max_shell_value ):
+			max_shell = neighbour_max_shell_value
+		print("----->"),
 	print()
 	print("MAX SHELL REACHED : "+str(max_shell))
