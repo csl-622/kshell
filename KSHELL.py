@@ -3,8 +3,17 @@ import string
 import matplotlib.pyplot as plt
 import operator
 import random
+import sys
 
-####### H INDEX CALCULATOR
+############################################################################
+#
+#
+#  FUNCTIONS
+#
+#
+############################################################################
+
+###### H INDEX CALCULATOR
 def H_index(degree, H_value_of_neighbours):
 	## VARIABLES
 	min_h = 0
@@ -19,6 +28,7 @@ def H_index(degree, H_value_of_neighbours):
 
 	return min_h
 
+###### CHECK FOR NODES LESS THAN DEGREE
 def check(H,deg):
 	flag = 0
 	for i in H.nodes():
@@ -27,7 +37,7 @@ def check(H,deg):
 			break
 	return flag		
 
-
+###### FIND SET OF NODES WITH LESS DEGREE
 def find_set(H,deg):
 	temp2 = []
 	for i in H.nodes():
@@ -46,6 +56,7 @@ def find_set(H,deg):
 ############################################################################
 
 ## VARIABLES
+dataset_value = sys.argv[1]
 G = 0
 H = 0
 temp = []
@@ -61,10 +72,17 @@ current = 0
 max_shell = 0
 neighbour_max_shell = 0
 neighbour_max_shell_value = 0
-
+file_node_details = 0
+file_random_walk = 0
+file_hill_climbing = 0
 
 ## ( creating digraph )
-G = nx.read_adjlist("DATASET/1/dataset1.txt",create_using=nx.Graph(), nodetype=int)
+G = nx.read_adjlist("DATASET/"+dataset_value+"/dataset"+dataset_value+".txt",create_using=nx.Graph(), nodetype=int)
+
+## ( updating files )
+file_node_details = open("OUTPUT/"+dataset_value+"/node_details_"+dataset_value+".txt",'w+')
+file_random_walk = open("OUTPUT/"+dataset_value+"/random_walk_"+dataset_value+".txt",'w+')
+file_hill_climbing = open("OUTPUT/"+dataset_value+"/hill_climbing_"+dataset_value+".txt",'w+')
 
 ## ( Updating the variables )
 nodes_list = list(G.nodes())
@@ -137,60 +155,63 @@ for i in range(0,len(buckets),1):
 		dict_shell[j] = i+1
 
 ## ( Displaying the details of nodes in graph )
-# print("==========================================")
-# for i in node_details:
-# 	print(i)
-# print("==========================================")
+file_node_details.write("==========================================\n")
+for i in node_details:
+	for j in range(0,len(i),1):
+		file_node_details.write(str(i[j])+"\t")
+	file_node_details.write("\n")
+file_node_details.write("==========================================\n")
 
 
 ## ( Updating variable and displaying max shell number in graph )
 actual_max_shell = len(buckets) + 1
-print("ACTUAL MAX SHELL : "+str(actual_max_shell))
+file_random_walk.write("ACTUAL MAX SHELL : "+str(actual_max_shell)+"\n")
+file_hill_climbing.write("ACTUAL MAX SHELL : "+str(actual_max_shell)+"\n")
 
 
 ###### RANDOM WALK
-# print("=========================================")
-# print("RANDOM WALK :")
-# print("=========================================")
+file_random_walk.write("=========================================\n")
+file_random_walk.write("RANDOM WALK :\n")
+file_random_walk.write("=========================================\n")
 
-# # ( Random walk main process )
-# for i in range(0,no_run,1):
-# 	print("--------------------------------------")
-# 	print("RUN NO  : "+str(i+1))
-# 	current = random.choice(nodes_list)
-# 	max_shell = dict_shell[current] + 1
-
-# 	for j in range(1,percent_nodes,1):
-# 		print(str(current)+":"+str(dict_shell[current]+1)),
-# 		neighbours = [m for m in G[current]]
-# 		current = random.choice(neighbours)
-# 		if ( max_shell < dict_shell[current] + 1 ):
-# 			max_shell = dict_shell[current] + 1
-# 		print("->"),
-# 	print()
-# 	print("MAX SHELL REACHED : "+str(max_shell))
-
-###### HILL CLIMBING
-print("=========================================")
-print("HILL CLIMBING :")
-print("=========================================")
-
-## ( Hill climbing main process )
+## ( Random walk main process )
 for i in range(0,no_run,1):
-	print("--------------------------------------")
-	print("RUN NO  : "+str(i+1))
+	file_random_walk.write("--------------------------------------\n")
+	file_random_walk.write("RUN NO  : "+str(i+1)+"\n")
 	current = random.choice(nodes_list)
 	max_shell = dict_shell[current] + 1
 
 	for j in range(1,percent_nodes,1):
-		print(str(current)+":"+str(dict_shell[current]+1)),
+		file_random_walk.write(str(current)+":"+str(dict_shell[current]+1))
+		neighbours = [m for m in G[current]]
+		current = random.choice(neighbours)
+		if ( max_shell < dict_shell[current] + 1 ):
+			max_shell = dict_shell[current] + 1
+		file_random_walk.write("->")
+	file_random_walk.write("\n")
+	file_random_walk.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
+
+###### HILL CLIMBING
+file_hill_climbing.write("=========================================\n")
+file_hill_climbing.write("HILL CLIMBING :\n")
+file_hill_climbing.write("=========================================\n")
+
+## ( Hill climbing main process )
+for i in range(0,no_run,1):
+	file_hill_climbing.write("--------------------------------------\n")
+	file_hill_climbing.write("RUN NO  : "+str(i+1)+"\n")
+	current = random.choice(nodes_list)
+	max_shell = dict_shell[current] + 1
+
+	for j in range(1,percent_nodes,1):
+		file_hill_climbing.write(str(current)+":"+str(dict_shell[current]+1))
 		
 		if ( dict_shell[current] + 1 != actual_max_shell ):
 			neighbours = [m for m in G[current]]
 			neighbour_max_shell = neighbours[0]
 			neighbour_max_shell_value = dict_shell[neighbour_max_shell] + 1
 			for k in neighbours:
-				#print(str(k)+":"+str(dict_shell[k]+1))
+				#file_hill_climbing.write(str(k)+":"+str(dict_shell[k]+1))
 				if ( neighbour_max_shell_value < dict_shell[k] + 1 ):
 					neighbour_max_shell = k
 					neighbour_max_shell_value = dict_shell[k] + 1
@@ -200,6 +221,10 @@ for i in range(0,no_run,1):
 		current = neighbour_max_shell
 		if ( max_shell < neighbour_max_shell_value ):
 			max_shell = neighbour_max_shell_value
-		print("----->"),
-	print()
-	print("MAX SHELL REACHED : "+str(max_shell))
+		file_hill_climbing.write("----->")
+	file_hill_climbing.write("\n")
+	file_hill_climbing.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
+
+file_node_details.close()
+file_random_walk.close()
+file_hill_climbing.close()
