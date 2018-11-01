@@ -66,7 +66,7 @@ no_of_Hindex = 4
 actual_max_shell = 0
 dict_shell = {}
 no_run = 30
-percent_of_nodes = 1.0
+percent_of_nodes = float(sys.argv[2])
 percent_nodes = 0 
 distinct_shell = []
 total_no_distinct_shell = 0
@@ -83,8 +83,8 @@ G = nx.read_adjlist("DATASET/"+dataset_value+"/dataset"+dataset_value+".txt",cre
 
 ## ( updating files )
 file_node_details = open("OUTPUT/"+dataset_value+"/node_details_"+dataset_value+".txt",'w+')
-file_random_walk = open("OUTPUT/"+dataset_value+"/random_walk_"+dataset_value+".txt",'w+')
-file_hill_climbing = open("OUTPUT/"+dataset_value+"/hill_climbing_"+dataset_value+".txt",'w+')
+file_random_walk = open("OUTPUT/"+dataset_value+"/random_walk_"+dataset_value+"_"+str(sys.argv[2])+".txt",'w+')
+file_hill_climbing = open("OUTPUT/"+dataset_value+"/hill_climbing_"+dataset_value+"_"+str(sys.argv[2])+".txt",'w+')
 
 ## ( Updating the variables )
 nodes_list = list(G.nodes())
