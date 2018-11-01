@@ -68,6 +68,8 @@ dict_shell = {}
 no_run = 30
 percent_of_nodes = 1.0
 percent_nodes = 0 
+distinct_shell = []
+total_no_distinct_shell = 0
 current = 0
 max_shell = 0
 neighbour_max_shell = 0
@@ -180,16 +182,30 @@ for i in range(0,no_run,1):
 	file_random_walk.write("RUN NO  : "+str(i+1)+"\n")
 	current = random.choice(nodes_list)
 	max_shell = dict_shell[current] + 1
+	distinct_shell = []
 
 	for j in range(1,percent_nodes,1):
 		file_random_walk.write(str(current)+":"+str(dict_shell[current]+1))
+		if (dict_shell[current]+1) not in distinct_shell:
+			distinct_shell.append((dict_shell[current]+1))
+
 		neighbours = [m for m in G[current]]
 		current = random.choice(neighbours)
 		if ( max_shell < dict_shell[current] + 1 ):
 			max_shell = dict_shell[current] + 1
 		file_random_walk.write("->")
+
+	total_no_distinct_shell = total_no_distinct_shell + len(distinct_shell)
+	#print(len(distinct_shell))
 	file_random_walk.write("\n")
 	file_random_walk.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
+	file_random_walk.write("DISTINCT SHELLS : ")
+	for k in distinct_shell:
+		file_random_walk.write(str(k)+" : ")
+	file_random_walk.write("\n")
+file_random_walk.write("++++++++++++++++++++++++++++++++++++++++\n")
+file_random_walk.write("AVERAGE DISTINCT SHELLS : "+str((float)(total_no_distinct_shell)/(float)(no_run))+"\n")
+
 
 ###### HILL CLIMBING
 file_hill_climbing.write("=========================================\n")
