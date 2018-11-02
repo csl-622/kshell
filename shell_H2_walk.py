@@ -140,7 +140,7 @@ while(q<50):
          
          
          for o in range(t):
-               shell_list.append( shell_no[walk[o]])
+               shell_list.append( shell_no[N.index(walk[o])])
          shell_set = set(shell_list)
          shell_set_list = list(shell_set)
          for s in range(t):
