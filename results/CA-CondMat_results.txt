@@ -1,0 +1,265 @@
+//results of CA-CondMat//
+
+For Randomwalk:
+
+no of nodes in graph:23133
+walk 1 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 2 no of distint shells encountered = 18
+         no of times max shell_no encountered is :2
+walk 3 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 4 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 5 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 6 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 7 no of distint shells encountered = 19
+         no of times max shell_no encountered is :6
+walk 8 no of distint shells encountered = 3
+         no of times max shell_no encountered is :0
+walk 9 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 10 no of distint shells encountered = 19
+         no of times max shell_no encountered is :0
+walk 11 no of distint shells encountered = 19
+         no of times max shell_no encountered is :0
+walk 12 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 13 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 14 no of distint shells encountered = 15
+         no of times max shell_no encountered is :0
+walk 15 no of distint shells encountered = 1
+         no of times max shell_no encountered is :0
+walk 16 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 17 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 18 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 19 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 20 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 21 no of distint shells encountered = 3
+         no of times max shell_no encountered is :0
+walk 22 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 23 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 24 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 25 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 26 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 27 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 28 no of distint shells encountered = 15
+         no of times max shell_no encountered is :0
+walk 29 no of distint shells encountered = 20
+         no of times max shell_no encountered is :30
+walk 30 no of distint shells encountered = 18
+         no of times max shell_no encountered is :5
+walk 31 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 32 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 33 no of distint shells encountered = 19
+         no of times max shell_no encountered is :1
+walk 34 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 35 no of distint shells encountered = 18
+         no of times max shell_no encountered is :4
+walk 36 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 37 no of distint shells encountered = 15
+         no of times max shell_no encountered is :0
+walk 38 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 39 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 40 no of distint shells encountered = 19
+         no of times max shell_no encountered is :0
+walk 41 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 42 no of distint shells encountered = 19
+         no of times max shell_no encountered is :0
+walk 43 no of distint shells encountered = 19
+         no of times max shell_no encountered is :0
+walk 44 no of distint shells encountered = 20
+         no of times max shell_no encountered is :14
+walk 45 no of distint shells encountered = 20
+         no of times max shell_no encountered is :6
+walk 46 no of distint shells encountered = 18
+         no of times max shell_no encountered is :0
+walk 47 no of distint shells encountered = 19
+         no of times max shell_no encountered is :0
+walk 48 no of distint shells encountered = 17
+         no of times max shell_no encountered is :0
+walk 49 no of distint shells encountered = 16
+         no of times max shell_no encountered is :0
+walk 50 no of distint shells encountered = 1
+         no of times max shell_no encountered is :0
+[0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 5, 5, 0, 0, 0, 0, 1, 1, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+on an average in length of 231 we encountered a node of max shell no for 1.36 times
+on average in every walk 16.24 distint shells are encountered
+
+For Hillclimbing:
+
+no of nodes in graph:23133
+walk 1 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 2 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 3 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 4 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 5 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 6 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 7 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 8 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 9 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 10 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 11 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 12 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 13 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 14 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 15 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 16 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 17 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 18 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 19 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 20 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 21 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 22 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 23 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 24 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 25 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 26 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 27 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 28 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 29 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 30 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 31 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 32 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 33 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 34 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 35 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 36 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 37 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 38 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 39 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 40 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 41 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 42 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 43 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+walk 44 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 45 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 46 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 47 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 48 :no of times max shell_no encountered is :2
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 115.5
+walk 49 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 2
+          no of steps required to encounter max shell are 231.0
+walk 50 :no of times max shell_no encountered is :1
+           no of distint shells encountered = 3
+          no of steps required to encounter max shell are 231.0
+[2, 1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 1]
+on an average in length of 231 we encountered a node of max shell no for 1.34 times
+on average in every walk 2.24 distint shells are encountered
