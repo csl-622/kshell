@@ -1,0 +1,9 @@
+//results of GOwalla_edges//
+
+For Randomwalk:
+
+taking a lot of time to run
+
+For Hillclimbing:
+
+taking a lot of time to run
