@@ -73,8 +73,10 @@ distinct_shell = []
 total_no_distinct_shell = 0
 current = 0
 max_shell = 0
+neighbour_shell = 0
 neighbour_max_shell = []
 neighbour_max_shell_value = 0
+neighbour_least_travelled = 0
 node_least_visited = 0
 file_node_details = 0
 file_random_walk = 0
@@ -209,7 +211,58 @@ file_random_walk.write("++++++++++++++++++++++++++++++++++++++++\n")
 file_random_walk.write("AVERAGE DISTINCT SHELLS : "+str((float)(total_no_distinct_shell)/(float)(no_run))+"\n")
 
 
-###### HILL CLIMBING
+###### HILL CLIMBING ( travelling least traveled maximum shell )
+# file_hill_climbing.write("=========================================\n")
+# file_hill_climbing.write("HILL CLIMBING :\n")
+# file_hill_climbing.write("=========================================\n")
+
+# ## ( Hill climbing main process )
+# for i in range(0,no_run,1):
+# 	dict_nodes_visited = {}
+
+# 	for j in nodes_list:
+# 		dict_nodes_visited[j] = 0
+
+# 	file_hill_climbing.write("--------------------------------------\n")
+# 	file_hill_climbing.write("RUN NO  : "+str(i+1)+"\n")
+# 	current = random.choice(nodes_list)
+# 	max_shell = dict_shell[current] + 1
+	
+# 	for j in range(1,percent_nodes,1):
+# 		file_hill_climbing.write(str(current)+":"+str(dict_shell[current]+1))
+
+# 		if ( dict_shell[current] + 1 == actual_max_shell ):
+# 			break
+
+# 		dict_nodes_visited[current] = ((int)(dict_nodes_visited[current])) + 1
+# 		neighbours = [m for m in G[current]]
+
+# 		neighbour_max_shell = []
+# 		neighbour_max_shell_value = dict_shell[neighbours[0]] + 1
+		
+# 		for k in neighbours:
+# 			if ( neighbour_max_shell_value < dict_shell[k] + 1 ):
+# 				neighbour_max_shell_value = dict_shell[k] + 1
+
+# 		for k in neighbours:
+# 			if ( neighbour_max_shell_value == dict_shell[k] + 1):
+# 				neighbour_max_shell.append(k)
+
+# 		node_least_visited = neighbour_max_shell[0]
+
+# 		for k in neighbour_max_shell:
+# 			if ( dict_nodes_visited[k] < dict_nodes_visited[node_least_visited] ):
+# 				node_least_visited = k
+
+# 		current = node_least_visited
+# 		if ( max_shell < neighbour_max_shell_value ):
+# 			max_shell = neighbour_max_shell_value
+# 		file_hill_climbing.write("----->")
+
+# 	file_hill_climbing.write("\n")
+# 	file_hill_climbing.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
+
+###### HILL CLIMBING ( Travelling node not travelled )
 file_hill_climbing.write("=========================================\n")
 file_hill_climbing.write("HILL CLIMBING :\n")
 file_hill_climbing.write("=========================================\n")
@@ -223,7 +276,9 @@ for i in range(0,no_run,1):
 
 	file_hill_climbing.write("--------------------------------------\n")
 	file_hill_climbing.write("RUN NO  : "+str(i+1)+"\n")
-	current = random.choice(nodes_list)
+	
+
+	current = random.choice(nodes_list) 
 	max_shell = dict_shell[current] + 1
 	
 	for j in range(1,percent_nodes,1):
@@ -232,34 +287,25 @@ for i in range(0,no_run,1):
 		if ( dict_shell[current] + 1 == actual_max_shell ):
 			break
 
+
 		dict_nodes_visited[current] = ((int)(dict_nodes_visited[current])) + 1
 		neighbours = [m for m in G[current]]
 
-		neighbour_max_shell = []
-		neighbour_max_shell_value = dict_shell[neighbours[0]] + 1
-		
-		for k in neighbours:
-			if ( neighbour_max_shell_value < dict_shell[k] + 1 ):
-				neighbour_max_shell_value = dict_shell[k] + 1
+		neighbour_least_travelled = neighbours[0]
+		neighbour_shell = dict_shell[neighbour_least_travelled] + 1
 
 		for k in neighbours:
-			if ( neighbour_max_shell_value == dict_shell[k] + 1):
-				neighbour_max_shell.append(k)
+			if ( dict_nodes_visited[neighbour_least_travelled] < dict_nodes_visited[k] ):
+				neighbour_least_travelled = k
+			elif ( dict_nodes_visited[neighbour_least_travelled] == dict_nodes_visited[k] ):
+				if ( neighbour_shell < (dict_shell[k] + 1) ):
+					neighbour_least_travelled = k
 
-		node_least_visited = neighbour_max_shell[0]
-
-		for k in neighbour_max_shell:
-			if ( dict_nodes_visited[k] < dict_nodes_visited[node_least_visited] ):
-				node_least_visited = k
-
-		current = node_least_visited
-		if ( max_shell < neighbour_max_shell_value ):
-			max_shell = neighbour_max_shell_value
+		current = neighbour_least_travelled
 		file_hill_climbing.write("----->")
 
 	file_hill_climbing.write("\n")
 	file_hill_climbing.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
-
 file_node_details.close()
 file_random_walk.close()
 file_hill_climbing.close()
