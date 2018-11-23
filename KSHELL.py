@@ -55,8 +55,14 @@ def find_set(H,deg):
 #
 ############################################################################
 
-## VARIABLES
+## CHOICES
 dataset_value = sys.argv[1]
+percent_of_nodes = float(sys.argv[2])
+part_1 = int(sys.argv[3])
+part_2 = int(sys.argv[4])
+part_3 = int(sys.argv[5])
+
+## VARIABLES
 G = 0
 H = 0
 temp = []
@@ -67,7 +73,6 @@ actual_max_shell = 0
 dict_shell = {}
 dict_nodes_visited = {}
 no_run = 30
-percent_of_nodes = float(sys.argv[2])
 percent_nodes = 0 
 distinct_shell = []
 total_no_distinct_shell = 0
@@ -175,137 +180,175 @@ file_random_walk.write("ACTUAL MAX SHELL : "+str(actual_max_shell)+"\n")
 file_hill_climbing.write("ACTUAL MAX SHELL : "+str(actual_max_shell)+"\n")
 
 
+
+#######################################################################################################
+#######################################################################################################
+
+
+
 ###### RANDOM WALK
-file_random_walk.write("=========================================\n")
-file_random_walk.write("RANDOM WALK :\n")
-file_random_walk.write("=========================================\n")
+if (part_1 == 1):
+	file_random_walk.write("=========================================\n")
+	file_random_walk.write("RANDOM WALK :\n")
+	file_random_walk.write("=========================================\n")
 
-## ( Random walk main process )
-for i in range(0,no_run,1):
-	file_random_walk.write("--------------------------------------\n")
-	file_random_walk.write("RUN NO  : "+str(i+1)+"\n")
-	current = random.choice(nodes_list)
-	max_shell = dict_shell[current] + 1
-	distinct_shell = []
+	## ( Random walk main process )
+	for i in range(0,no_run,1):
+		file_random_walk.write("--------------------------------------\n")
+		file_random_walk.write("RUN NO  : "+str(i+1)+"\n")
+		current = random.choice(nodes_list)
+		max_shell = dict_shell[current] + 1
+		distinct_shell = []
 
-	for j in range(1,percent_nodes,1):
-		file_random_walk.write(str(current)+":"+str(dict_shell[current]+1))
-		if (dict_shell[current]+1) not in distinct_shell:
-			distinct_shell.append((dict_shell[current]+1))
+		for j in range(1,percent_nodes,1):
+			file_random_walk.write(str(current)+":"+str(dict_shell[current]+1))
+			if (dict_shell[current]+1) not in distinct_shell:
+				distinct_shell.append((dict_shell[current]+1))
 
-		neighbours = [m for m in G[current]]
-		current = random.choice(neighbours)
-		if ( max_shell < dict_shell[current] + 1 ):
-			max_shell = dict_shell[current] + 1
-		file_random_walk.write("->")
+			neighbours = [m for m in G[current]]
+			current = random.choice(neighbours)
+			if ( max_shell < dict_shell[current] + 1 ):
+				max_shell = dict_shell[current] + 1
+			file_random_walk.write("->")
 
-	total_no_distinct_shell = total_no_distinct_shell + len(distinct_shell)
-	#print(len(distinct_shell))
-	file_random_walk.write("\n")
-	file_random_walk.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
-	file_random_walk.write("DISTINCT SHELLS : ")
-	for k in distinct_shell:
-		file_random_walk.write(str(k)+" : ")
-	file_random_walk.write("\n")
-file_random_walk.write("++++++++++++++++++++++++++++++++++++++++\n")
-file_random_walk.write("AVERAGE DISTINCT SHELLS : "+str((float)(total_no_distinct_shell)/(float)(no_run))+"\n")
+		total_no_distinct_shell = total_no_distinct_shell + len(distinct_shell)
+		#print(len(distinct_shell))
+		file_random_walk.write("\n")
+		file_random_walk.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
+		file_random_walk.write("DISTINCT SHELLS : ")
+		for k in distinct_shell:
+			file_random_walk.write(str(k)+" : ")
+		file_random_walk.write("\n")
+	file_random_walk.write("++++++++++++++++++++++++++++++++++++++++\n")
+	file_random_walk.write("AVERAGE DISTINCT SHELLS : "+str((float)(total_no_distinct_shell)/(float)(no_run))+"\n")
 
 
-###### HILL CLIMBING ( travelling least traveled maximum shell )
-# file_hill_climbing.write("=========================================\n")
-# file_hill_climbing.write("HILL CLIMBING :\n")
-# file_hill_climbing.write("=========================================\n")
 
-# ## ( Hill climbing main process )
-# for i in range(0,no_run,1):
-# 	dict_nodes_visited = {}
+#######################################################################################################
+#######################################################################################################
 
-# 	for j in nodes_list:
-# 		dict_nodes_visited[j] = 0
 
-# 	file_hill_climbing.write("--------------------------------------\n")
-# 	file_hill_climbing.write("RUN NO  : "+str(i+1)+"\n")
-# 	current = random.choice(nodes_list)
-# 	max_shell = dict_shell[current] + 1
-	
-# 	for j in range(1,percent_nodes,1):
-# 		file_hill_climbing.write(str(current)+":"+str(dict_shell[current]+1))
 
-# 		if ( dict_shell[current] + 1 == actual_max_shell ):
-# 			break
+###### HILL CLIMBING
+if (part_2 == 1):
+	## ( travelling least traveled maximum shell )
+	# file_hill_climbing.write("=========================================\n")
+	# file_hill_climbing.write("HILL CLIMBING :\n")
+	# file_hill_climbing.write("=========================================\n")
 
-# 		dict_nodes_visited[current] = ((int)(dict_nodes_visited[current])) + 1
-# 		neighbours = [m for m in G[current]]
+	# ## ( Hill climbing main process )
+	# for i in range(0,no_run,1):
+	# 	dict_nodes_visited = {}
 
-# 		neighbour_max_shell = []
-# 		neighbour_max_shell_value = dict_shell[neighbours[0]] + 1
+	# 	for j in nodes_list:
+	# 		dict_nodes_visited[j] = 0
+
+	# 	file_hill_climbing.write("--------------------------------------\n")
+	# 	file_hill_climbing.write("RUN NO  : "+str(i+1)+"\n")
+	# 	current = random.choice(nodes_list)
+	# 	max_shell = dict_shell[current] + 1
 		
-# 		for k in neighbours:
-# 			if ( neighbour_max_shell_value < dict_shell[k] + 1 ):
-# 				neighbour_max_shell_value = dict_shell[k] + 1
+	# 	for j in range(1,percent_nodes,1):
+	# 		file_hill_climbing.write(str(current)+":"+str(dict_shell[current]+1))
 
-# 		for k in neighbours:
-# 			if ( neighbour_max_shell_value == dict_shell[k] + 1):
-# 				neighbour_max_shell.append(k)
+	# 		if ( dict_shell[current] + 1 == actual_max_shell ):
+	# 			break
 
-# 		node_least_visited = neighbour_max_shell[0]
+	# 		dict_nodes_visited[current] = ((int)(dict_nodes_visited[current])) + 1
+	# 		neighbours = [m for m in G[current]]
 
-# 		for k in neighbour_max_shell:
-# 			if ( dict_nodes_visited[k] < dict_nodes_visited[node_least_visited] ):
-# 				node_least_visited = k
+	# 		neighbour_max_shell = []
+	# 		neighbour_max_shell_value = dict_shell[neighbours[0]] + 1
+			
+	# 		for k in neighbours:
+	# 			if ( neighbour_max_shell_value < dict_shell[k] + 1 ):
+	# 				neighbour_max_shell_value = dict_shell[k] + 1
 
-# 		current = node_least_visited
-# 		if ( max_shell < neighbour_max_shell_value ):
-# 			max_shell = neighbour_max_shell_value
-# 		file_hill_climbing.write("----->")
+	# 		for k in neighbours:
+	# 			if ( neighbour_max_shell_value == dict_shell[k] + 1):
+	# 				neighbour_max_shell.append(k)
 
-# 	file_hill_climbing.write("\n")
-# 	file_hill_climbing.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
+	# 		node_least_visited = neighbour_max_shell[0]
 
-###### HILL CLIMBING ( Travelling node not travelled )
-file_hill_climbing.write("=========================================\n")
-file_hill_climbing.write("HILL CLIMBING :\n")
-file_hill_climbing.write("=========================================\n")
+	# 		for k in neighbour_max_shell:
+	# 			if ( dict_nodes_visited[k] < dict_nodes_visited[node_least_visited] ):
+	# 				node_least_visited = k
 
-## ( Hill climbing main process )
-for i in range(0,no_run,1):
-	dict_nodes_visited = {}
+	# 		current = node_least_visited
+	# 		if ( max_shell < neighbour_max_shell_value ):
+	# 			max_shell = neighbour_max_shell_value
+	# 		file_hill_climbing.write("----->")
 
-	for j in nodes_list:
-		dict_nodes_visited[j] = 0
+	# 	file_hill_climbing.write("\n")
+	# 	file_hill_climbing.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
 
-	file_hill_climbing.write("--------------------------------------\n")
-	file_hill_climbing.write("RUN NO  : "+str(i+1)+"\n")
-	
+	## ( Travelling node not travelled )
+	file_hill_climbing.write("=========================================\n")
+	file_hill_climbing.write("HILL CLIMBING :\n")
+	file_hill_climbing.write("=========================================\n")
 
-	current = random.choice(nodes_list) 
-	max_shell = dict_shell[current] + 1
-	
-	for j in range(1,percent_nodes,1):
-		file_hill_climbing.write(str(current)+":"+str(dict_shell[current]+1))
+	## ( Hill climbing main process )
+	for i in range(0,no_run,1):
+		dict_nodes_visited = {}
 
-		if ( dict_shell[current] + 1 == actual_max_shell ):
-			break
+		for j in nodes_list:
+			dict_nodes_visited[j] = 0
+
+		file_hill_climbing.write("--------------------------------------\n")
+		file_hill_climbing.write("RUN NO  : "+str(i+1)+"\n")
+		
+
+		current = random.choice(nodes_list) 
+		max_shell = dict_shell[current] + 1
+		
+		for j in range(1,percent_nodes,1):
+			file_hill_climbing.write(str(current)+":"+str(dict_shell[current]+1))
+
+			if ( dict_shell[current] + 1 == actual_max_shell ):
+				break
 
 
-		dict_nodes_visited[current] = ((int)(dict_nodes_visited[current])) + 1
-		neighbours = [m for m in G[current]]
+			dict_nodes_visited[current] = ((int)(dict_nodes_visited[current])) + 1
+			neighbours = [m for m in G[current]]
 
-		neighbour_least_travelled = neighbours[0]
-		neighbour_shell = dict_shell[neighbour_least_travelled] + 1
+			neighbour_least_travelled = neighbours[0]
+			neighbour_shell = dict_shell[neighbour_least_travelled] + 1
 
-		for k in neighbours:
-			if ( dict_nodes_visited[neighbour_least_travelled] < dict_nodes_visited[k] ):
-				neighbour_least_travelled = k
-			elif ( dict_nodes_visited[neighbour_least_travelled] == dict_nodes_visited[k] ):
-				if ( neighbour_shell < (dict_shell[k] + 1) ):
+			for k in neighbours:
+				if ( dict_nodes_visited[neighbour_least_travelled] < dict_nodes_visited[k] ):
 					neighbour_least_travelled = k
+				elif ( dict_nodes_visited[neighbour_least_travelled] == dict_nodes_visited[k] ):
+					if ( neighbour_shell < (dict_shell[k] + 1) ):
+						neighbour_least_travelled = k
 
-		current = neighbour_least_travelled
-		file_hill_climbing.write("----->")
+			current = neighbour_least_travelled
+			file_hill_climbing.write("----->")
 
-	file_hill_climbing.write("\n")
-	file_hill_climbing.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
-file_node_details.close()
-file_random_walk.close()
-file_hill_climbing.close()
+		file_hill_climbing.write("\n")
+		file_hill_climbing.write("MAX SHELL REACHED : "+str(max_shell)+"\n")
+	file_node_details.close()
+	file_random_walk.close()
+	file_hill_climbing.close()
+
+
+
+#######################################################################################################
+#######################################################################################################
+
+## VARIABLES
+shortest_distance = 0
+maximum_shortest_distance = 0
+maximum_shortest_distance_nodes = []
+
+###### DIAMETER
+if (part_3 == 1):
+	for i in nodes_list:
+		for j in nodes_list:
+			if ( i != j ):
+				shortest_distance = nx.shortest_path_length( G, source = i, target = j)
+				if ( maximum_shortest_distance < shortest_distance ):
+					maximum_shortest_distance = shortest_distance
+					maximum_shortest_distance_nodes = nx.shortest_path( G, source = i, target = j)
+
+
+print(maximum_shortest_distance_nodes)
