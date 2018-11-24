@@ -2,61 +2,13 @@ import networkx as nx
 import matplotlib.pyplot as ply
 import random
 import numpy as np
-
-def check_existence(H,d):
-        f = 0
-        for each in H.nodes():
-                  if H.degree(each) <= d:
-                           f =1
-                           break
-        return f				      
-        
-def find(H,it):
-       set1=[]
-       for each in H.nodes():
-                if H.degree(each) <= it :
-                            set1.append(each)	
-       return set1						
-
 G=nx.Graph() 
-G = nx.read_edgelist('filename.txt', nodetype = int)
+G = nx.read_edgelist('graph_name.txt', nodetype = int)
 n = len(G.nodes())
 
 print("no of nodes in graph:"+str(n))
 t = int(n/100)
 N=list(G.nodes())
-
-'''  Finding the buckets '''
-H = G.copy()
-it = 1
-tmp = []
-buckets = []
-shell_no=[]
-while(1):
-          flag =check_existence(H, it)
-          if flag == 0:
-                    it = it+1
-                    buckets.append(tmp)
-                    tmp = []
-          if flag ==1:
-                    node_set = find(H,it)
-                    for each in node_set:
-                             H.remove_node(each)
-                             tmp.append(each)
-          if H.number_of_nodes() == 0:
-                    buckets.append(tmp)
-                    break
-
-k=len(buckets)
-max_shell_no = k
-for i in N:
-         shell_no.append(i)
-                  
-for j in range(n):
-      for r in range(k):
-            p=len(buckets[r])
-            for y in range(p):
-                  if (N[j] == buckets[r][y]) : shell_no[j] = r+1    				           
 H1=[]
 
 H2=[]
@@ -83,7 +35,7 @@ for i in range(n):
       DD=[]
       DDD=[]
       index = 0
-#print(len(H1))	
+    
 ''' Finding the H2 indeces of the nodes of graph '''
 
 E=[]
@@ -107,12 +59,8 @@ for i in range(n):
       EE=[]
       EEE=[]
       index = 0
-#print("success")
-
 q=0
 x=0
-#print(H2)
-
 #walk
 max_encountered_list = []
 walk=[]
@@ -121,49 +69,40 @@ shell_set_list=[]
 distint_shell_list=[]
 F=[]
 no_of_steps=[]
-k = len(buckets)
+H2_1=[]
+#k = len(buckets)
+#periphery nodes:
+for i in range(len(G.nodes())):
+      if(H2[i] == min(H2)):H2_1.append(N[i])
 
+maximum = max(H2)
+total = 0  
+#print(H2_1)	  
 while(q<50): 
-         start = random.choice(buckets[k-1])
-         for m in range(t):
+          start = random.choice(H2_1)
+          r=0
+          repeat_count = 0
+
+          while ((H2[N.index(start)] < maximum ) and (r<t)):
                
                walk.append(start)
                M=list(G.neighbors(start))
-               if(len(M)==0):start = random.choice(buckets[k-1])
+               if(len(M)==0):
+                      start = random.choice(H2_1)
+                      repeat_count = repeat_count+1
                for j in range(len(M)):
-                     F.append(H2[N.index(M[j])])
+                      F.append(H2[N.index(M[j])])
                #print(F)
                ind = max([i for i,j in enumerate(F) if j == max(F)])		  
-               F=[]                   
-               start = M[ind]
-               
-         
-         
-         for o in range(t):
-               shell_list.append( shell_no[N.index(walk[o])])
-         shell_set = set(shell_list)
-         shell_set_list = list(shell_set)
-         for s in range(t):
-               if(shell_list[s] == max_shell_no) : x= x+1
-         print("walk "+str(q+1)+" :no of times max shell_no encountered is :" + str(x))
-         print("           no of distint shells encountered = "+str(len(shell_set_list)))
-         if(x != 0): 
-                print("          no of steps required to encounter max shell are "+str(t/x))
-                no_of_steps.append(t/x)
-         else:
-                print("          in coverage of .01*nodes it did not reach innermost shell")
-                no_of_steps.append(0)		
-         max_encountered_list.append(x)
-         distint_shell_list.append(len(shell_set_list))
-         q = q+1
-         walk=[]
-         shell_list=[]
-         
-         x=0
-              
-print(max_encountered_list)
-avg = sum(max_encountered_list)/len(max_encountered_list)
-avgg = sum(distint_shell_list)/len(distint_shell_list)
-avggg = sum(no_of_steps)/len(no_of_steps)
-print("on an average in length of "+str(t)+" we encountered a node of max shell no for "+str(avg)+" times")
-print("on average in every walk " +str(avgg)+" distint shells are encountered")
+               F=[]
+               if(H2[N.index(M[ind])] > H2[N.index(start)]):                   
+                      start = M[ind]
+               else:
+                      repeat_count  =  repeat_count+1
+                      start = M[ind]
+               r = r+1
+          print(str(q)+"st walk: the number of steps taken to reach the inner shell are = "+str(r))
+          print("no of times it got stuck at the local maximum or for not having neighbors is: "+str(repeat_count))
+          total = total + r
+          q=q+1
+print("avg no of steps taken in an iteration to reach inner most shell are: "+str(total/q))         
