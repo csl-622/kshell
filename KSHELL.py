@@ -84,11 +84,7 @@ percent_nodes = 0
 current = 0
 max_shell = 0
 
-neighbour_least_travelled = 0
-node_least_visited = 0
-file_node_details = 0
-file_random_walk = 0
-file_hill_climbing = 0
+
 
 ## ( creating digraph )
 G = nx.read_adjlist("DATASET/"+dataset_value+"/dataset"+dataset_value+".txt",create_using=nx.Graph(), nodetype=int)
@@ -96,8 +92,8 @@ G = nx.read_adjlist("DATASET/"+dataset_value+"/dataset"+dataset_value+".txt",cre
 ## ( updating files )
 file_node_details = open("OUTPUT/"+dataset_value+"/node_details_"+dataset_value+".txt",'w+')
 file_random_walk = open("OUTPUT/"+dataset_value+"/random_walk_"+dataset_value+"_"+str(sys.argv[2])+".txt",'w+')
-file_hill_climbing_1 = open("OUTPUT/"+dataset_value+"/hill_climbing_1_"+dataset_value+"_"+str(sys.argv[2])+".txt",'w+')
-file_hill_climbing_2 = open("OUTPUT/"+dataset_value+"/hill_climbing_2_"+dataset_value+"_"+str(sys.argv[2])+".txt",'w+')
+file_hill_climbing_1 = open("OUTPUT/"+dataset_value+"/hill_climbing_1_"+dataset_value+".txt",'w+')
+file_hill_climbing_2 = open("OUTPUT/"+dataset_value+"/hill_climbing_2_"+dataset_value+".txt",'w+')
 
 ## ( Updating the variables )
 nodes_list = list(G.nodes())
@@ -247,7 +243,8 @@ neighbour_max_h = []
 neighbour_max_h_value = 0
 h_index_compare = 2
 neighbour_h = 0
-
+neighbour_least_travelled = 0
+node_least_visited = 0
 
 ###### HILL CLIMBING
 if (part_2 == 1):
@@ -270,7 +267,7 @@ if (part_2 == 1):
 		current = random.choice(buckets[0])
 		max_shell = dict_shell[current] + 1
 		
-		for j in range(1,percent_nodes,1):
+		while(True):
 			file_hill_climbing_1.write(str(current)+":"+str(dict_shell[current]+1))
 			if ( dict_shell[current] + 1 == actual_max_shell ):
 				break
@@ -324,7 +321,7 @@ if (part_2 == 1):
 		current = random.choice(buckets[0]) 
 		max_shell = dict_shell[current] + 1
 		
-		for j in range(1,percent_nodes,1):
+		while(True):
 			file_hill_climbing_2.write(str(current)+":"+str(dict_shell[current]+1))
 
 			if ( dict_shell[current] + 1 == actual_max_shell ):
