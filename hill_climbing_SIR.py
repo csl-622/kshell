@@ -3,7 +3,7 @@ import matplotlib.pyplot as ply
 import random
 import numpy as np
 G=nx.Graph() 
-G = nx.read_edgelist('email-Eu-Core.txt', nodetype = int)
+G = nx.read_edgelist('CA-GrQc.txt', nodetype = int)
 n = len(G.nodes())
 
 print("no of nodes in graph:"+str(n))
@@ -80,7 +80,7 @@ steps = []
 #print(H2_1)	  
 visited = []
 unvisited = list(G.nodes())
-M_unvisited =[] 
+
 e=0
 while(q<50): 
           start = random.choice(H2_1)
@@ -88,7 +88,7 @@ while(q<50):
           repeat_count = 0
           
           while ((H2[W.index(start)] < maximum ) and (r<t)):
-               
+               M_unvisited = []
                walk.append(start)
                if(start in unvisited):visited.append(start)
                if(start in unvisited):unvisited.remove(start)
@@ -96,9 +96,10 @@ while(q<50):
                for e in range(len(M)):
                       if (M[e] in unvisited):M_unvisited.append(M[e]) 
                if(len(M_unvisited)==0):
-                      start = random.choice(H2_1)
-                      if(start in unvisited):unvisited.remove(start)
+                      print("cannot be reached")
+                      r =r+1
                       repeat_count = repeat_count+1
+                      break
                for j in range(len(M_unvisited)):
                       F.append(H2[W.index(M_unvisited[j])])
                #print(F)
@@ -112,17 +113,23 @@ while(q<50):
                       start = random.choice(M_unvisited)
                       if(start in unvisited):unvisited.remove(start)
                r = r+1
-          if(repeat_count == t):
+          if((repeat_count == t) ):
                print(str(q)+" walk :failed to reach the inner shell")
                f=f+1
           else:
-                total = total + r
-                
                 steps.append(r)
                 print(str(q)+" walk: the number of steps taken to reach the inner shell are = "+str(r))
                 print("no of times it got stuck at the local maximum or for not having neighbors is: "+str(repeat_count))
           q=q+1
-print("avg no of steps taken in an iteration to reach inner most shell are: "+str(total/q))
+p=0
+i=0
+steps1 = []
+for i in range(len(steps)):
+      if(steps[i] != t):
+          steps1.append(steps[i])
+          p = p+1
+total = sum(steps1)	  		  
+print("avg no of steps taken in an iteration to reach inner most shell are: "+str(total/len(steps)))
 mode = max(set(steps), key=steps.count)       
 print("mode of the list of  no of steps taken to reach inner shell is: "+str(mode))  
-print("no of failures to reach the inner shell in 50 attemps are: "+str(f))
+print("no of failures to reach the inner shell in 50 attemps are: "+str(50 - p))
