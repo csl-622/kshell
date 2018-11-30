@@ -4,7 +4,7 @@ import random
 import numpy as np
 
 G=nx.Graph() 
-G = nx.read_edgelist('Gowalla_edges.txt', nodetype = int)
+G = nx.read_edgelist('Graph_NAME.txt', nodetype = int)
 n = len(G.nodes())
 print("no of nodes in graph:"+str(n))
 t = int(n/100)
@@ -34,7 +34,6 @@ for i in range(n):
       DD=[]
       DDD=[]
       index = 0
-    
 ''' Finding the H2 indeces of the nodes of graph '''
 
 E=[]
@@ -78,20 +77,28 @@ diameter_shells = []
 i=0
 j=0
 inner_encountered=[]
+inner_hit = []
 for i in range(len(diameter)):
       diameter_shells = []
       number = 0
+      hit = 0
       for j in range(len(diameter[i])):
             diameter_shells.append(H2[diameter[i][j]])
-            if(H2[diameter[i][j]] == maximum) : number = number +1
-      inner_encountered.append(number)	
+            if(H2[diameter[i][j]] == maximum) :
+                   number = number +1
+                   hit = 1
+      inner_encountered.append(number)
+      inner_hit.append(hit)	
       print(i)	
       print(diameter_shells)
-      print('no of times diameter innermost shell is : '+str(number))
+      print('no of times the diameter passed  through inner nodes are : '+str(number))
+	  
 avg = sum(inner_encountered)/len(inner_encountered)
+avgg = sum(inner_hit)/len(inner_hit)
+print("no of tiimes it hit inner shell in each iteration: ")
 print(inner_encountered)
-print('no of times on an average the diameter encountered the inner shell is : '+str(avg))
-
-
-
+print("to see whether it hit the inner shell : ")
+print(inner_hit)
+print('no of times on an average the diameter encountered the inner nodes is : '+str(avg))
+print("no of times on an average the diameter hit the inner shell is : "+str(avgg))
 
