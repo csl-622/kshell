@@ -3,7 +3,7 @@ import matplotlib.pyplot as ply
 import random
 import numpy as np
 G=nx.Graph() 
-G = nx.read_edgelist('soc-Epinions1.txt', nodetype = int)
+G = nx.read_edgelist('Graph_name.txt', nodetype = int)
 n = len(G.nodes())
 
 print("no of nodes in graph:"+str(n))
