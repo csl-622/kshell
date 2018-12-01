@@ -3,7 +3,7 @@ import matplotlib.pyplot as ply
 import random
 import numpy as np
 G=nx.Graph() 
-G = nx.read_edgelist('email-Eu-Core.txt', nodetype = int)
+G = nx.read_edgelist('soc-Epinions1.txt', nodetype = int)
 n = len(G.nodes())
 
 print("no of nodes in graph:"+str(n))
@@ -100,7 +100,7 @@ while(q<50):
                       repeat_count  =  repeat_count+1
                       start = M[ind]
                r = r+1
-          if(repeat_count == t):
+          if((repeat_count == t) or (r == t)):
                print(str(q)+" walk :failed to reach the inner shell")
                f=f+1
           else:
@@ -110,7 +110,7 @@ while(q<50):
                 print(str(q)+" walk: the number of steps taken to reach the inner shell are = "+str(r))
                 print("no of times it got stuck at the local maximum or for not having neighbors is: "+str(repeat_count))
           q=q+1
-print("avg no of steps taken in an iteration to reach inner most shell are: "+str(total/q))
+print("avg no of steps taken in an iteration to reach inner most shell are: "+str(sum(steps)/len(steps)))
 mode = max(set(steps), key=steps.count)       
 print("mode of the list of  no of steps taken to reach inner shell is: "+str(mode))  
 print("no of failures to reach the inner shell in 50 attemps are: "+str(f))
