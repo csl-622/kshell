@@ -3,7 +3,7 @@ import matplotlib.pyplot as ply
 import random
 import numpy as np
 G=nx.Graph() 
-G = nx.read_edgelist('CA-GrQc.txt', nodetype = int)
+G = nx.read_edgelist('Graph_name.txt', nodetype = int)
 n = len(G.nodes())
 
 print("no of nodes in graph:"+str(n))
@@ -77,18 +77,23 @@ for i in range(len(G.nodes())):
 maximum = max(H2)
 total = 0  
 steps = []
+fail = 0
 #print(H2_1)	  
 visited = []
 unvisited = list(G.nodes())
 
 e=0
-while(q<50): 
+while(q<50):
+          visited = []
+          unvisited = list(G.nodes())
+ 
           start = random.choice(H2_1)
           r=0
           repeat_count = 0
           
           while ((H2[W.index(start)] < maximum ) and (r<t)):
                M_unvisited = []
+              
                walk.append(start)
                if(start in unvisited):visited.append(start)
                if(start in unvisited):unvisited.remove(start)
@@ -98,6 +103,7 @@ while(q<50):
                if(len(M_unvisited)==0):
                       print("cannot be reached")
                       r =r+1
+                      fail = fail+1
                       repeat_count = repeat_count+1
                       break
                for j in range(len(M_unvisited)):
@@ -132,4 +138,4 @@ total = sum(steps1)
 print("avg no of steps taken in an iteration to reach inner most shell are: "+str(total/len(steps)))
 mode = max(set(steps), key=steps.count)       
 print("mode of the list of  no of steps taken to reach inner shell is: "+str(mode))  
-print("no of failures to reach the inner shell in 50 attemps are: "+str(50 - p))
+print("no of failures to reach the inner shell in "+str(50+fail)+" attemps are: "+str(50 - p+fail))

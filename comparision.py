@@ -19,7 +19,7 @@ def find(H,it):
        return set1						
 
 G=nx.Graph() 
-G = nx.read_edgelist('Email-Eu-Core.txt', nodetype = int)
+G = nx.read_edgelist('Graph_name.txt', nodetype = int)
 n = len(G.nodes())
 
 print("no of nodes in graph:"+str(n))
@@ -108,14 +108,15 @@ l =  max(H2)
 print("no of different H2 indeces are : "+str(l+1))
 
 #finding correlativity
-hit=0
-miss=0
+concordant=0
+discordant=0
+equals =0
 for i in range(len(N)-1):
        for j in range(i+1, len(N)):
-             if(((shell_no[i] > shell_no[j]) and (H2[i] > H2[j])) or ((shell_no[i] < shell_no[j]) and (H2[i] < H2[j]))) : hit=hit+1
-             else: miss = miss+1
-             
-correlativity = hit/(hit+miss)
-print("no of hits are : "+str(hit)+" ; no of misses are : "+str(miss))
+             if(((shell_no[i] > shell_no[j]) and (H2[i] > H2[j])) or ((shell_no[i] < shell_no[j]) and (H2[i] < H2[j]))) : concordant = concordant+1
+             elif(((shell_no[i] < shell_no[j]) and (H2[i] > H2[j])) or ((shell_no[i] > shell_no[j]) and (H2[i] < H2[j]))) : discordant = discordant+1
+             else:equals=equals+1             
+correlativity = (concordant - discordant)/(concordant + discordant + equals)
+print("no of concordant pairs are : "+str(concordant)+" ; no of discordant pairs are : "+str(discordant) +" ; rest : " + str(equals))
 print("correlativity between the h2indeces and coreness is : "+str(correlativity))
-	  
+      
