@@ -19,7 +19,7 @@ def find(H,it):
        return set1						
 
 G=nx.Graph() 
-G = nx.read_edgelist('email-Eu-Core.txt', nodetype = int)
+G = nx.read_edgelist('Graph_name.txt', nodetype = int)
 n = len(G.nodes())
 
 print("no of nodes in graph:"+str(n))
